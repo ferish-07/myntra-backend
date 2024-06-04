@@ -7,6 +7,7 @@ const CounterSchema = new Schema({
   category_id: Number,
   section_id: Number,
   sub_section_id: Number,
+  brand_id: Number,
 });
 
 module.exports = mongoose.model("counters", CounterSchema);

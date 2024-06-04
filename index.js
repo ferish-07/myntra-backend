@@ -18,6 +18,7 @@ app.use(express.json());
 // app.use("/downloads", express.static(path.join("downloads")));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/categories", require("./routes/category"));
+app.use("/api/brands", require("./routes/brands"));
 // app.use("/api/notes", require("./routes/notes"));
 
 app.listen(port, () => {

@@ -45,9 +45,9 @@ router.post(
       await Counter.create({
         unique_id: 1,
         sequence_value: 100,
-        category_id: 100,
-        section_id: 100,
-        sub_section_id: 100,
+        // category_id: 100,
+        // section_id: 100,
+        // sub_section_id: 100,
       });
       seq_id = 100;
     }
