@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/add", async (req, res) => {
   const { brand_name } = req.body;
-
+  console.log("---HITT-");
   let brand = await Brands.findOne({
     brand_name: { $regex: new RegExp(`^${brand_name}$`, "i") },
   });

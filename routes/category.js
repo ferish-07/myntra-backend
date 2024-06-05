@@ -18,13 +18,20 @@ router.post("/add/main/category", async (req, res) => {
     ).then((res) => {
       counter_id = res.category_id;
     });
+  } else {
+    await Counter.create({
+      unique_id: 1,
+      category_id: 100,
+    });
+    counter_id = 100;
   }
-  console.log("----------------------------", category_name);
+  console.log("----------------------------", category_name, counter_id);
   await MainCategory.create({
     category_id: counter_id,
     category_name: category_name,
   })
     .then(() => {
+      console.log("---");
       return res.send({
         error_status: false,
         message: "Data inserted Successfully",
@@ -136,6 +143,13 @@ router.get("/getSectionData", async (req, res) => {
         as: "sections.sub_sections",
       },
     },
+    // {
+    //   $addFields: {
+    //     "sections.sub_sections": {
+    //       $ifNull: ["$sub_sections", []],
+    //     },
+    //   },
+    // },
 
     {
       $group: {
@@ -147,11 +161,8 @@ router.get("/getSectionData", async (req, res) => {
     },
     { $sort: { category_id: 1 } },
   ]);
-  array.map((i) => {
-    if (i.sections[0].sub_sections.length == 0) {
-      i.sections = [];
-    }
-  });
+
+  console.log("--arrrr-", JSON.stringify(array));
   res.send({
     error_status: false,
     message: "Data Fetched Successfully",
