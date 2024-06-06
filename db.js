@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-const mongoURL =
-  "mongodb+srv://modiferish:Ferish123@ferish.ol6gmp9.mongodb.net/Myntra";
+const mongoURL = process.env.DBHOST;
 
 const connectToMongo = async () => {
   await mongoose
