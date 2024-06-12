@@ -170,4 +170,34 @@ router.get("/getSectionData", async (req, res) => {
   });
 });
 
+//DELETE
+
+router.post("/delete/section", async (req, res) => {
+  const { category_id } = req.body;
+
+  let category = await MainCategory.findOne({ category_id: category_id });
+
+  if (category) {
+    await MainCategory.deleteOne({ category_id: category_id })
+      .then(() => {
+        return res.send({
+          error_status: false,
+          message: "Data Deleted Successfully",
+        });
+      })
+      .catch((err) => {
+        console.log("0-------errr Delete brand", err);
+        return res.send({
+          error_status: true,
+          message: "Something Went Wrong",
+        });
+      });
+  } else {
+    return res.send({
+      error_status: true,
+      message: "Brand Not found",
+    });
+  }
+});
+
 module.exports = router;
